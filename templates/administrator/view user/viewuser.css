@@ -1,0 +1,77 @@
+
+body {
+    font-family: 'Arial', sans-serif; /* Use a clean, modern font */
+    background-color: #f4f4f4; /* Light background for the page */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center; /* Center the content horizontally */
+    align-items: center; /* Center the content vertically */
+    height: 100vh; /* Full viewport height */
+}
+
+.container {
+    width: 90%;
+    max-width: 1000px; /* Set max width for the container */
+    background-color: #fff; /* White background for the container */
+    padding: 20px;
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    text-align: center;
+}
+
+h1 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 30px; /* Spacing below the heading */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse; /* Collapsing borders between table cells */
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 15px; /* Add padding inside cells */
+    text-align: center; /* Center the text inside table cells */
+    border: 1px solid #ddd; /* Light gray border for cells */
+}
+
+th {
+    background-color: #4CAF50; /* Green background for headers */
+    color: white;
+    font-size: 1.1rem;
+}
+
+td {
+    background-color: #f9f9f9; /* Light gray for rows */
+    font-size: 1rem;
+    color: #555; /* Darker text for readability */
+}
+
+tr:nth-child(even) td {
+    background-color: #f1f1f1; /* Alternate row background */
+}
+
+tr:hover {
+    background-color: #e7e7e7; /* Highlight row on hover */
+}
+
+button {
+    background-color: #4CAF50; /* Green button */
+    color: white;
+    padding: 8px 16px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+button:focus {
+    outline: none; /* Remove outline on focus */
+}

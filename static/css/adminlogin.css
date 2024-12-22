@@ -10,7 +10,7 @@ body {
     height: 100vh;
     font-size: medium;
     align-items: center;
-    background: linear-gradient(130deg, #fafafd, #262627);
+    background-color: aliceblue;
     background-repeat: no-repeat;
     background-size: cover;
     backdrop-filter: blur(7px);

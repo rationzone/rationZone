@@ -10,7 +10,7 @@ body{
     height: 100vh;
     font-size: medium;
     align-items: center;
-    background-image: url('https://img.freepik.com/free-vector/gradient-background-wave-minimalist-style_483537-3734.jpg?t=st=1726912107~exp=1726915707~hmac=23fbd115dc1cc7e3267f8e7d120a7b856d71e2d90c896189f74dd8d72118a98b&w=1060');
+    background-color: aliceblue;
     background-repeat:no-repeat;
     background-size:cover;
     backdrop-filter: blur(7px);

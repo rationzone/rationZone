@@ -9,6 +9,7 @@ body {
     height: 100vh; /* Full viewport height */
 }
 
+
 .container {
     width: 80%;
     max-width: 1000px; /* Set max width for the container */
@@ -38,7 +39,7 @@ th, td {
 }
 
 th {
-    background-color: #4CAF50; /* Green background for headers */
+    background-color: #aacbf7; /* Green background for headers */
     color: white;
     font-size: 1.2rem;
 }

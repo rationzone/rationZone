@@ -1,30 +1,81 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head> 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Feedback</title>
-    <link rel="stylesheet" href="shopopeningandclosingstatus.css">
+    <link rel="stylesheet" href="{% static 'css/shopopeningandclosings.css' %}">
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        button {
+            padding: 5px 10px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <h1>SHOP OPENIG&CLOSING TIME</h1> <!-- Heading is at the top -->
-        <table border="1">
+        <h1>SHOP OPENING & CLOSING TIME</h1>
+        <table>
             <thead>
                 <tr>
-                    <th>shop name</th>
-                    <th>shop opening</th>
-                    <th>shop closing</th>
+                    <th>Shop Name</th>
+                    <th>Shop Opening</th>
+                    <th>Shop Closing</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td> </td>
-                    <td></td>
-                    <td></td>
+                    <td>Shop 1</td>
+                    <td><input type="time" value="08:00" disabled /></td>
+                    <td><input type="time" value="18:00" disabled /></td>
+                    <td><button onclick="editTime(this)">Edit</button></td>
+                </tr>
+                <tr>
+                    <td>Shop 2</td>
+                    <td><input type="time" value="09:00" disabled /></td>
+                    <td><input type="time" value="20:00" disabled /></td>
+                    <td><button onclick="editTime(this)">Edit</button></td>
                 </tr>
             </tbody>
         </table>
     </div>
+
+    <script>
+        function editTime(button) {
+            const row = button.closest('tr');
+            const inputs = row.querySelectorAll('input[type="time"]');
+            
+            // Toggle the disabled state of the input fields
+            inputs.forEach(input => {
+                input.disabled = !input.disabled;
+            });
+            
+            // Change the button text based on the current state
+            if (inputs[0].disabled) {
+                button.textContent = 'Edit';
+            } else {
+                button.textContent = 'Save';
+            }
+        }
+    </script>
 </body>
 </html>

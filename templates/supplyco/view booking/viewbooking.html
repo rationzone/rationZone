@@ -1,0 +1,84 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback</title>
+    <link rel="stylesheet" href="{% static 'css/viewbooking.css' %}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        .btn-book {
+            padding: 5px 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn-book:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>USERS</h1> <!-- Heading is at the top -->
+        <table border="1">
+            <caption>Shop Booking Details</caption>
+            <thead>
+                <tr>
+                    <th>Shop Name</th>
+                    <th>Shop Product</th>
+                    <th>Product Rate</th>
+                    <th>Booking</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>ABC Store</td>
+                    <td>Electronics</td>
+                    <td>rs 100</td>
+                    <td><button class="btn-book">Book Now</button></td>
+                </tr>
+                <tr>
+                    <td>XYZ Mart</td>
+                    <td>Groceries</td>
+                    <td>rs 50</td>
+                    <td><button class="btn-book">Book Now</button></td>
+                </tr>
+                <!-- Additional rows can go here -->
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

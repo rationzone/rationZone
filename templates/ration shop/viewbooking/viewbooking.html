@@ -1,31 +1,78 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head> 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feedback</title>
-    <link rel="stylesheet" href="viewbooking.css">
+    <title>View Booking Product</title>
+    <link rel="stylesheet" href="{% static 'css/viewbooking.css' %}">
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        button {
+            padding: 6px 12px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <h1>VIEW BOOKING PRODUCT</h1> <!-- Heading is at the top -->
-        <table border="1">
+        <h1>VIEW BOOKING PRODUCT</h1> <!-- Heading at the top -->
+        <table>
             <thead>
                 <tr>
-                    <th>id</th>
-                    <th>custemer name</th>
-                    <th>Booking time</th>
-                    <th>view booking product</th>
+                    <th>ID</th>
+                    <th>Customer Name</th>
+                    <th>Booking Time</th>
+                    <th>View Booking Product</th>
                 </tr>
             </thead>
             <tbody>
+                <!-- Example booking row -->
                 <tr>
-                    <td> </td>
-                    <td></td>
-                    <td></td>
+                    <td>001</td>
+                    <td>John Doe</td>
+                    <td>2024-12-21 14:00</td>
+                    <td><button onclick="viewBookingDetails(1)">View Product</button></td>
                 </tr>
+                <tr>
+                    <td>002</td>
+                    <td>Jane Smith</td>
+                    <td>2024-12-22 10:30</td>
+                    <td><button onclick="viewBookingDetails(2)">View Product</button></td>
+                </tr>
+                <!-- More rows can be added as needed -->
             </tbody>
         </table>
     </div>
+
+    <script>
+        // Function to handle the "View Product" button click
+        function viewBookingDetails(bookingId) {
+            // Example: Displaying the booking ID to simulate viewing product details
+            alert("Viewing details for booking ID: " + bookingId);
+            // Here you could open a modal or redirect to a detailed page
+            // window.location.href = "/booking-details?id=" + bookingId;  // Example redirect
+        }
+    </script>
 </body>
 </html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaint Reply</title>
+    <link rel="stylesheet" href="complaintreply.css">
+</head>
+<body>
+
+      <div class="complaint-details">
+            <h2>Complaint Details:</h2>
+            <p><strong>user</strong></p>
+            <p><strong>Date Submitted:</strong> {{a.datetime}}</p>
+            <p><strong>Complaint Description:</strong> {{a.complaint}}</p>
+        </div>
+        <div class="feedback">
+            <h3>complaint relpy:</h3>
+            <textarea name="feedback" id="feedback" rows="5" placeholder="Your additional comments here..."></textarea>
+            <button class="btn">reply</button>
+        </div>
+    </div>
+
+</body>
+</html>

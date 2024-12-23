@@ -1,0 +1,94 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.heading {
+    font-size: 2em;
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.subheading {
+    text-align: center;
+    color: #7f8c8d;
+    font-size: 1.1em;
+    margin-bottom: 30px;
+}
+
+.complaint-details,
+.response-section {
+    margin-bottom: 30px;
+}
+
+.complaint-details h2,
+.response-section h2 {
+    color: #16a085;
+    font-size: 1.5em;
+}
+
+.complaint-details p,
+.response-section p {
+    font-size: 1em;
+    margin-bottom: 10px;
+}
+
+.feedback {
+    text-align: center;
+}
+
+textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 1em;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: none;
+}
+
+.btn {
+    padding: 10px 20px;
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #27ae60;
+}
+
+@media screen and (max-width: 600px) {
+    .container {
+        padding: 15px;
+    }
+
+    .heading {
+        font-size: 1.5em;
+    }
+
+    .subheading {
+        font-size: 1em;
+    }
+}

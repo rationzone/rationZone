@@ -14,25 +14,24 @@
         <table>
             <thead>
                 <tr>
-                    <th>Shop Name</th>
-                    <th>Shop Product</th>
-                    <th>Product Rate</th>
-                    <th>Booking</th>
+                    <th>user id</th>
+                    <th>name</th>
+                    <th>phone</th>
+                    <th>email</th>
+                    <th>address</th>
                 </tr>
             </thead>
             <tbody>
+                {% for i in a %}
                 <tr>
-                    <td>Shop 1</td>
-                    <td>Product 1</td>
-                    <td>4.5</td>
-                    <td><button>Book Now</button></td>
+                    <th>{{i.userid}}</th>
+                    <th>{{i.name}}</th>
+                    <td>{{i.phone}}</td>
+                    <td>{{i.email}}</td>
+                    <td>{{i.address}}</td>
+                    
                 </tr>
-                <tr>
-                    <td>Shop 2</td>
-                    <td>Product 2</td>
-                    <td>3.8</td>
-                    <td><button>Book Now</button></td>
-                </tr>
+                {% endfor %}
                 <!-- Add more rows as needed -->
             </tbody>
         </table>

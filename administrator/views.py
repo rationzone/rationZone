@@ -37,18 +37,35 @@ class adminlogin(View):
         return redirect('login')
 
 
-class verifyshop(View):
-    def get(self,request):
-        return render(request,'administrator/verifyshop/verifyshop.html')
+class verifyshop(View):    
+    def get(self,request): 
+        c=Shopprofile.objects.all()
+        return render(request,'administrator/verifyshop/verifyshop.html',{'a':c})
+    
+class approve_shop(View):
+    def get(self,request,login_id):
+        obj=LoginTable.objects.get(id=login_id)
+        obj.usertype="shop"
+        obj.save()
+        return HttpResponse('''<script>alert("accept");window.location="/verifyshop"</script>''')
+class reject_shop(View):
+    def get(self,request,login_id):
+        obj=LoginTable.objects.get(id=login_id)
+        obj.usertype="reject"
+        obj.save()
+        return HttpResponse('''<script>alert("reject");window.location="/verifyshop"</script>''')
 class complaint(View):
     def get(self,request):
-         return render(request,'administrator/view complaint & reply/complaint.html')
+        c=complainttable.objects.all()
+        return render(request,'administrator/view complaint & reply/complaint.html',{'a':c})
+class complaintreply(View):
+    def get(self,request,pk):
+        c=complainttable.objects.get(pk=pk)
+        return render(request,'administrator/view complaint & reply/complaintreply.html',{'a':c})   
 class feedback(View):
     def get(self,request):
-         return render(request,'administrator/view feedback/feedback.html')                     
-class viewuser(View):
-    def get(self,request):
-         return render(request,'administrator/view user/viewuser.html')                         
+        c=feedbacktable.objects.all()
+        return render(request,'administrator/view feedback/feedback.html',{'a':c})                                             
 class addandupdate(View):
     def get(self,request):
          return render(request,'ration shop/addandupdate/addandupdate.html')
@@ -78,14 +95,16 @@ class managenotification(View):
          return render(request,'supplyco/manage notifications/managenotification.html')
 class supplycologin(View):
     def get(self,request):
-         return render(request,'supplyco/supplyco login/supplycologin.html')  
+         return render(request,'supplyco/supplyco login/supplycologin.html')      
 class viewusers(View):
     def get(self,request):
-         return render(request,'administrator/view user/viewusers.html')                         
+         c=usertable.objects.all()
+         return render(request,'administrator/view user/viewusers.html',{'a':c}) 
 class supplycohome(View):
     def get(self,request):
          return render(request,'supplyco/supplycohome/supplycohome.html')
 class addandmanagesupplyco(View):
-    def get(self,request):
-         return render(request,'supplyco/addandmanagesupplyco/addandmanagesupplyco.html')
+       def get(self,request):
+         c=Shopprofile.objects.all()
+         return render(request,'supplyco/addandmanagesupplyco/addandmanagesupplyco.html',{'a':c})
 

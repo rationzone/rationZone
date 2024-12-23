@@ -15,20 +15,22 @@
         <table>
             <thead>
                 <tr>
-                    <th>Card Number</th>
-                    <th>Complaint</th>
-                    <th>Date & Time</th>
-                    <th>Reply</th>
+                    <th> USER</th>
+                    <th>complaint</th>
+                    <th>date & time</th>
+                    <th>reply</th>
                 </tr>
             </thead>
             <tbody>
+                {% for i in a %}
                 <tr>
-                    <td>ABC12345</td>
-                    <td>Complaint example</td>
-                    <td>1/2/2024<br>12:30</td>
-                    <td><button class="reply-btn">Reply</button></td>
+                    <td>{{i.user}}</td>
+                    <td>{{i.complaint}}</td>
+                    <td>{{i.datetime}}</td>
+                    <td><a href="/complaintreply/{{i.id}}" class="reply-btn">Reply</a></td>
                 </tr>
-                <!-- Additional rows can be added here -->
+                {% endfor %}
+                
             </tbody>
         </table>
     </div>

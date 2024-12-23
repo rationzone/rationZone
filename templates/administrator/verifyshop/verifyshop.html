@@ -52,28 +52,29 @@
         <tr>
             <th>shop Name</th>
             <th>owner</th>
-            <th>email</th>
+            <th>address</th>
+            <th>phone</th>
+            <th>Opening time</th>
+            <th>Opening time</th>
             <th>Actions</th>
         </tr>
+        {% for i in a %}
         <tr>
-            <td>Product 1</td>
-            <td>$10.00</td>
-            <td>5</td>
+            <th>{{i.shopname}}</th>
+            <th>{{i.owner}}</th>
+            <td>{{i.address}}</td>
+            <td>{{i.phone}}</td>
+            <td>{{i.openningtime}}</td>
+            <td>{{i.closingtime}}</td>
             <td>
-                <a href="#" class="approve">Approve</a>
-                <a href="#" class="reject">Reject</a>
+                <a href="approve_shop/{{i.LOGINID.id}}" class="approve">Approve</a>
+                <a href="reject_shop/{{i.LOGINID.id}}" class="reject">Reject</a>
             </td>
+       
+            
         </tr>
-        <!-- Repeat rows as needed -->
-        <tr>
-            <td>Product 2</td>
-            <td>$20.00</td>
-            <td>10</td>
-            <td>
-                <a href="#" class="approve">Approve</a>
-                <a href="#" class="reject">Reject</a>
-            </td>
-        </tr>
+        {% endfor %}
+        
     </table>
 </body>
 </html>

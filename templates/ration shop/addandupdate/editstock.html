@@ -1,0 +1,46 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/supplycoregistration.css' %}">
+    
+</head>
+<body>
+    <div class="card">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h1>add stock
+            </h1>
+<div><label>
+
+stock id
+</label>
+<input type="text" name="stockid" id="" value="{{a.stockid}}" placeholder="enter stockid"></div>
+<div><label>
+name
+</label>
+<input type="text" name="name" id="" value="{{a.name}}" placeholder="enter name"></div>
+<div><label>
+image
+</label>
+<input type="file" name="image" id=""value="" placeholder="">
+<img src="{{a.image.url}}" width="50px" hight="50px" alt="">
+</div>
+<div><label>
+price
+</label>
+<input type="text" name="price" id=""value="{{a.price}}" placeholder="enter price"></div>
+<div><label>
+quantity
+</label>
+<input type="text" name="quantity" id=""value="{{a.quantity}}"placeholder="enter quantity"></div>
+<div><input type="submit" value="enter" id="rushfida"></div>
+
+    </form>
+    </div>
+</body>
+</html>

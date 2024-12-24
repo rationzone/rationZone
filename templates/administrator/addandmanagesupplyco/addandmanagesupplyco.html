@@ -59,15 +59,15 @@
         </tr>
         {% for i in a %}
         <tr>
-            <th>{{i.shopname}}</th>
-            <th>{{i.owner}}</th>
+            <td>{{i.supplycoid}}</td>
+            <td>{{i.owner}}</td>
             <td>{{i.address}}</td>
             <td>{{i.phone}}</td>
             <td>{{i.openningtime}}</td>
             <td>{{i.closingtime}}</td>
             <td>
-                <a href="#" class="approve">Approve</a>
-                <a href="#" class="reject">Reject</a>
+                <a href="approve_supplyco/{{i.LOGINID.id}}" class="approve">Approve</a>
+                <a href="reject_supplyco/{{i.LOGINID.id}}" class="reject">Reject</a>
             </td>
         </tr>
         {% endfor %}

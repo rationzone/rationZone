@@ -50,31 +50,30 @@
 <body>
     <table>
         <tr>
-            <th>shop Name</th>
-            <th>owner</th>
-            <th>address</th>
-            <th>phone</th>
-            <th>Opening time</th>
-            <th>Opening time</th>
+            <th>stock id</th>
+            <th>name</th>
+            <th>image</th>
+            <th>price</th>
+            <th>quantity</th>
             <th>Actions</th>
         </tr>
         {% for i in a %}
         <tr>
-            <td>{{i.shopname}}</td>
-            <td>{{i.owner}}</td>
-            <td>{{i.address}}</td>
-            <td>{{i.phone}}</td>
-            <td>{{i.openningtime}}</td>
-            <td>{{i.closingtime}}</td>
+            <td>{{i.stockid}}</td>
+            <td>{{i.name}}</td>
+            <td><img src="{{i.image.url}}" width="100" height="20"></td>
+            <td>{{i.price}}</td>
+            <td>{{i.quantity}}</td>
             <td>
-                <a href="approve_shop/{{i.LOGINID.id}}" class="approve">Approve</a>
-                <a href="reject_shop/{{i.LOGINID.id}}" class="reject">Reject</a>
+                <a href="/editstock/{{i.id}}">edit</a>
+                <a href="/deletestock/{{i.id}}" class="">delete</a>
+
             </td>
-       
-            
         </tr>
         {% endfor %}
-        
+        <tr>
+            <a href="addstock">Add</a>
+        </tr>
     </table>
 </body>
 </html>

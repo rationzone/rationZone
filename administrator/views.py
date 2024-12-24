@@ -1,6 +1,8 @@
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.views import View
+
+from .form import StockForm
 from .models import *
 # Create your views here.
 class adminhome(View):
@@ -25,7 +27,7 @@ class adminlogin(View):
 
             if obj.usertype == 'admin':
               return render(request,'administrator/add&managesupplyco/adminhome.html')
-            elif obj.usertype == 'user':
+            elif obj.usertype == 'shop':
               return render(request,'ration shop/rationhome/rationhome.html')
             else:
               return HttpResponse('''<script>alert("invalid username and password");window.location="/adminlogin"</script>''')
@@ -66,45 +68,93 @@ class feedback(View):
     def get(self,request):
         c=feedbacktable.objects.all()
         return render(request,'administrator/view feedback/feedback.html',{'a':c})                                             
+class addandupdatestock(View):
+    def get(self,request):
+        c=stocktable.objects.all()
+        return render(request,'ration shop/addandupdate/addandupdatestock.html',{'a':c})
+class addstock(View):
+    def get(self,request):
+        c=stocktable.objects.all()
+        return render(request,'ration shop/addandupdate/addstock.html',{'a':c}) 
+    def post(seif,request):
+        form=StockForm(request.POST, request.FILES) 
+        if form.is_valid():
+            f=form.save(commit=False)
+            obj = Shopprofile.objects.get(LOGINID=request.session['user_id'])
+            f.SHOP=obj
+            f.save()
+            return HttpResponse('''<script>alert("added");window.location="/addandupdatestock"</script>''')
+class editstock(View):
+    def get(self,request,stock_id):
+        c=stocktable.objects.get(id=stock_id)
+        return render(request,'ration shop/addandupdate/editstock.html',{'a':c})
+    def post(seif,request, stock_id):
+        c=stocktable.objects.get(id=stock_id)
+
+        form=StockForm(request.POST, request.FILES, instance=c) 
+        if form.is_valid():
+            form.save()
+        
+            return HttpResponse('''<script>alert("added");window.location="/addandupdatestock"</script>''')   
+class deletestock(View):
+    def get(self,request,stock_id):
+        c=stocktable.objects.get(id=stock_id)
+        c.delete()
+        return HttpResponse('''<script>alert("deleted");window.location="/addandupdatestock"</script>''')
+
+
 class addandupdate(View):
     def get(self,request):
-         return render(request,'ration shop/addandupdate/addandupdate.html')
+        return render(request,'ration shop/addandupdate/editstock.html')    
 class deliverystatus(View):
     def get(self,request):
-         return render(request,'ration shop/delivery status/deliverystatus.html')
+        return render(request,'ration shop/delivery status/deliverystatus.html')
 class rationhome(View):
     def get(self,request):
-         return render(request,'ration shop/rationhome/rationhome.html')
+        return render(request,'ration shop/rationhome/rationhome.html')
 class rationshoplogin(View):
     def get(self,request):
-         return render(request,'ration shop/rationshoplogin/rationshoplogin.html')
+        return render(request,'ration shop/rationshoplogin/rationshoplogin.html')
 class shopregistration(View):
     def get(self,request):
-         return render(request,'ration shop/rationshopregistration/shopregistration.html')  
+        return render(request,'ration shop/rationshopregistration/shopregistration.html')  
 class shopopeningandclosingstatus(View):
     def get(self,request):
-         return render(request,'ration shop/shopopeningandclosingstatus/shopopeningandclosingstatus.html')                         
+        obj=Shopprofile.objects.all()
+        return render(request,'ration shop/shopopeningandclosingstatus/shopopeningandclosingstatus.html',{'obj':obj})                         
 class viewbooking(View):
     def get(self,request):
-         return render(request,'ration shop/viewbooking/viewbooking.html') 
+        obj=shopBookingtable.objects.all()
+        return render(request,'ration shop/viewbooking/viewbooking.html',{'obj':obj}) 
 class addandmanageproduct(View):
     def get(self,request):
-         return render(request,'supplyco/add&manageproduct/addandmanageproduct.html') 
+        return render(request,'supplyco/add&manageproduct/addandmanageproduct.html') 
 class managenotification(View):
     def get(self,request):
-         return render(request,'supplyco/manage notifications/managenotification.html')
+        return render(request,'supplyco/manage notifications/managenotification.html')
 class supplycologin(View):
     def get(self,request):
-         return render(request,'supplyco/supplyco login/supplycologin.html')      
+        return render(request,'supplyco/supplyco login/supplycologin.html')      
 class viewusers(View):
     def get(self,request):
-         c=usertable.objects.all()
-         return render(request,'administrator/view user/viewusers.html',{'a':c}) 
+        c=usertable.objects.all()
+        return render(request,'administrator/view user/viewusers.html',{'a':c}) 
 class supplycohome(View):
     def get(self,request):
-         return render(request,'supplyco/supplycohome/supplycohome.html')
+        return render(request,'supplyco/supplycohome/supplycohome.html')
 class addandmanagesupplyco(View):
-       def get(self,request):
-         c=Shopprofile.objects.all()
-         return render(request,'supplyco/addandmanagesupplyco/addandmanagesupplyco.html',{'a':c})
-
+    def get(self,request):
+        c=supplycoprofile.objects.all()
+        return render(request,'administrator/addandmanagesupplyco/addandmanagesupplyco.html',{'a':c})
+class approve_supplyco(View):
+    def get(self,request,login_id):
+        obj=LoginTable.objects.get(id=login_id)
+        obj.usertype="supplyco"
+        obj.save()
+        return HttpResponse('''<script>alert("accept");window.location="/addandmanagesupplyco"</script>''')
+class reject_supplyco(View):
+    def get(self,request,login_id):
+        obj=LoginTable.objects.get(id=login_id)
+        obj.usertype="reject"
+        obj.save()
+        return HttpResponse('''<script>alert("reject");window.location="/addandmanagesupplyco"</script>''')

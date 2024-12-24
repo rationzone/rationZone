@@ -16,8 +16,8 @@ class Shopprofile(models.Model):
     LOGINID=models.ForeignKey(LoginTable,on_delete=models.CASCADE,null=True,blank=True)
 
 class supplycoprofile(models.Model):
-    supplyid=models.CharField(max_length=100,null=True,blank=True)
-    name=models.CharField(max_length=100,null=True,blank=True)
+    supplycoid=models.CharField(max_length=100,null=True,blank=True)
+    owner=models.CharField(max_length=100,null=True,blank=True)
     address=models.CharField(max_length=100,null=True,blank=True)
     phone=models.BigIntegerField(null=True,blank=True)
     openningtime=models.TimeField(null=True,blank=True)
@@ -44,6 +44,7 @@ class notificationtable(models.Model):
     datetime=models.DateField(null=True,blank=True)
 
 class producttable(models.Model):
+    SUPPLYCO=models.ForeignKey(Shopprofile,on_delete=models.CASCADE,null=True,blank=True)
     productid=models.CharField(max_length=100,null=True,blank=True)
     name=models.CharField(max_length=100,null=True,blank=True)
     image=models.FileField()
@@ -51,17 +52,37 @@ class producttable(models.Model):
     price=models.FloatField(null=True,blank=True)
     quantity=models.CharField(max_length=100,null=True,blank=True)
 
-class Bookingtable(models.Model):
+class stocktable(models.Model):
+    SHOP=models.ForeignKey(Shopprofile,on_delete=models.CASCADE,null=True,blank=True)
+    productid=models.CharField(max_length=100,null=True,blank=True)
+    name=models.CharField(max_length=100,null=True,blank=True)
+    image=models.FileField()
+    description=models.CharField(max_length=200,null=True,blank=True)
+    price=models.FloatField(null=True,blank=True)
+    quantity=models.CharField(max_length=100,null=True,blank=True)
+
+class shopBookingtable(models.Model):
     date=models.DateTimeField(null=True,blank=True)
     PRODUCT=models.ForeignKey(producttable,on_delete=models.CASCADE,null=True,blank=True)
     USERID=models.ForeignKey(usertable,on_delete=models.CASCADE,null=True,blank=True)
     STATUS=models.CharField(max_length=100,null=True,blank=True)
 
-    
+class supplycoBookingtable(models.Model):
+    date=models.DateTimeField(null=True,blank=True)
+    PRODUCT=models.ForeignKey(producttable,on_delete=models.CASCADE,null=True,blank=True)
+    USERID=models.ForeignKey(usertable,on_delete=models.CASCADE,null=True,blank=True)
+    STATUS=models.CharField(max_length=100,null=True,blank=True)
+
 class feedbacktable(models.Model):
     user=models.ForeignKey(usertable,on_delete=models.CASCADE,null=True,blank=True)
     feedback=models.CharField(max_length=400,null=True,blank=True)
     date=models.DateField(null=True,blank=True)
 
-
+class stocktable(models.Model):
+    SHOP=models.ForeignKey(Shopprofile,on_delete=models.CASCADE,null=True,blank=True)
+    stockid=models.IntegerField(null=True,blank=True)
+    name=models.CharField(max_length=100,null=True,blank=True)
+    image=models.FileField()
+    price=models.FloatField(null=True,blank=True)
+    quantity=models.IntegerField(null=True,blank=True)
       

@@ -39,22 +39,19 @@
                     <th>Shop Name</th>
                     <th>Shop Opening</th>
                     <th>Shop Closing</th>
-                    <th>Action</th>
+                    
                 </tr>
             </thead>
             <tbody>
+                {% for i in obj %}
                 <tr>
-                    <td>Shop 1</td>
-                    <td><input type="time" value="08:00" disabled /></td>
-                    <td><input type="time" value="18:00" disabled /></td>
-                    <td><button onclick="editTime(this)">Edit</button></td>
+                    <td>{{i.shopname}}</td>
+                    <td>{{i.openningtime}}</td>
+                    <td>{{i.closingtime}}</td>
+                    
                 </tr>
-                <tr>
-                    <td>Shop 2</td>
-                    <td><input type="time" value="09:00" disabled /></td>
-                    <td><input type="time" value="20:00" disabled /></td>
-                    <td><button onclick="editTime(this)">Edit</button></td>
-                </tr>
+                {% endfor %}
+                
             </tbody>
         </table>
     </div>

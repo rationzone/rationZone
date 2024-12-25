@@ -1,8 +1,9 @@
+from itertools import product
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.views import View
 
-from .form import StockForm
+from .form import *
 from .models import *
 # Create your views here.
 class adminhome(View):
@@ -29,6 +30,8 @@ class adminlogin(View):
               return render(request,'administrator/add&managesupplyco/adminhome.html')
             elif obj.usertype == 'shop':
               return render(request,'ration shop/rationhome/rationhome.html')
+            elif obj.usertype == 'supplyco':
+              return render(request,'supplyco/supplycohome/supplycohome.html')
             else:
               return HttpResponse('''<script>alert("invalid username and password");window.location="/adminlogin"</script>''')
 
@@ -63,7 +66,9 @@ class complaint(View):
 class complaintreply(View):
     def get(self,request,pk):
         c=complainttable.objects.get(pk=pk)
-        return render(request,'administrator/view complaint & reply/complaintreply.html',{'a':c})   
+        return render(request,'administrator/view complaint & reply/complaintreply.html',{'a':c}) 
+    # def post(self,request,pk):
+    #     c= 
 class feedback(View):
     def get(self,request):
         c=feedbacktable.objects.all()
@@ -122,16 +127,55 @@ class shopopeningandclosingstatus(View):
     def get(self,request):
         obj=Shopprofile.objects.all()
         return render(request,'ration shop/shopopeningandclosingstatus/shopopeningandclosingstatus.html',{'obj':obj})                         
-class viewbooking(View):
+class stockbooking(View):
     def get(self,request):
         obj=shopBookingtable.objects.all()
         return render(request,'ration shop/viewbooking/viewbooking.html',{'obj':obj}) 
+class productbooking(View):
+    def get(self,request):
+        obj=supplycoBookingtable.objects.all()
+        return render(request,'supplyco/view booking/viewbooking.html',{'obj':obj})     
 class addandmanageproduct(View):
     def get(self,request):
-        return render(request,'supplyco/add&manageproduct/addandmanageproduct.html') 
+        c=producttable.objects.all()
+        return render(request,'supplyco/add&manageproduct/addandmanageproduct.html',{'a':c}) 
+class addproduct(View):
+    def get(self,request):
+        c=producttable.objects.all()
+        return render(request,'supplyco/add&manageproduct/addproduct.html',{'a':c})
+    def post(seif,request):
+        form=productForm(request.POST, request.FILES) 
+        if form.is_valid():
+            f=form.save(commit=False)
+            obj = supplycoprofile.objects.get(LOGINID=request.session['user_id'])
+            f.SUPPLYCO=obj
+            f.save()
+            return HttpResponse('''<script>alert("added");window.location="/addandmanageproduct"</script>''')
+class editproduct(View):
+    def get(self,request,productid):
+        c=producttable.objects.get(id=productid)
+        return render(request,'supplyco/add&manageproduct/editproduct.html',{'a':c})  
+    def post(seif,request, productid):
+        c=producttable.objects.get(id=productid)
+
+        form=StockForm(request.POST, request.FILES, instance=c) 
+        if form.is_valid():
+            form.save()
+        
+            return HttpResponse('''<script>alert("edited");window.location="/addandmanageproduct"</script>''')
+class deleteproduct(View):
+    def get(self,request,productid):
+        c=producttable.objects.get(id=productid)
+        c.delete()
+        return HttpResponse('''<script>alert("deleted");window.location="/addandmanageproduct"</script>''')                    
 class managenotification(View):
     def get(self,request):
         return render(request,'supplyco/manage notifications/managenotification.html')
+    def post(seif,request):
+        form=notificationForm(request.POST, request.FILES) 
+        if form.is_valid():
+            form.save()
+            return HttpResponse('''<script>alert("sended");window.location="/managenotification"</script>''')
 class supplycologin(View):
     def get(self,request):
         return render(request,'supplyco/supplyco login/supplycologin.html')      
@@ -158,3 +202,7 @@ class reject_supplyco(View):
         obj.usertype="reject"
         obj.save()
         return HttpResponse('''<script>alert("reject");window.location="/addandmanagesupplyco"</script>''')
+class viewproduct(View):
+    def get(self,request,bookingid):
+        obj=supplycoBookingtable.objects.get(id=bookingid)
+        return render(request,'supplyco/viewproduct/viewproduct.html',{'a':obj})    

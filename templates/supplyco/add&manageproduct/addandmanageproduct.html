@@ -10,21 +10,39 @@
 </head>
 <body>
     <div class="container">
-        <h1>ADD & UPDATE PRODUCT</h1> <!-- Heading is at the top -->
+        <h1>ADD & UPDATE PRODUCT</h1> 
         <table border="1">
             <thead>
                 <tr>
-                    <th>shop name</th>
-                    <th>shop product</th>
+                    <th>supplyco id</th>
+                    <th>product</th>
+                    <th>image</th>
                     <th>product price</th>
+                    <th>market price</th>
+                    <th>quantity</th>
+                    <th>action</th>
+
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td> </td>
-                    <td></td>
-                    <td></td>
-                </tr>
+                {% for i in a %}
+        <tr>
+            <td>{{i.productid}}</td>
+            <td>{{i.name}}</td>
+            <td><img src="{{i.image.url}}" width="100" height="20"></td>
+            <td>{{i.price}}</td>
+            <td>{{i.marketprice}}</td>
+            <td>{{i.quantity}}</td>
+            <td>
+                <a href="/editproduct/{{i.id}}">edit</a>
+                <a href="/deleteproduct/{{i.id}}" class="">delete</a>
+
+            </td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <a href="addproduct">Add</a>
+        </tr>
             </tbody>
         </table>
     </div>

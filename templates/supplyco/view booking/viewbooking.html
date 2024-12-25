@@ -5,80 +5,72 @@
 <head> 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feedback</title>
+    <title>View Booking Product</title>
     <link rel="stylesheet" href="{% static 'css/viewbooking.css' %}">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-        .container {
-            width: 80%;
-            margin: auto;
-            text-align: center;
-        }
-        h1 {
-            margin-bottom: 20px;
-        }
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 20px;
+            margin-top: 20px;
         }
         th, td {
-            padding: 10px;
-            text-align: center;
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
         }
         th {
             background-color: #f4f4f4;
         }
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-        tr:hover {
-            background-color: #f1f1f1;
-        }
-        .btn-book {
-            padding: 5px 10px;
-            background-color: #007BFF;
+        button {
+            padding: 6px 12px;
+            cursor: pointer;
+            background-color: #4CAF50;
             color: white;
             border: none;
             border-radius: 5px;
-            cursor: pointer;
         }
-        .btn-book:hover {
-            background-color: #0056b3;
+        button:hover {
+            background-color: #45a049;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>USERS</h1> <!-- Heading is at the top -->
-        <table border="1">
-            <caption>Shop Booking Details</caption>
+        <h1>VIEW BOOKING product</h1> <!-- Heading at the top -->
+        <table>
             <thead>
+ 
                 <tr>
-                    <th>Shop Name</th>
-                    <th>Shop Product</th>
-                    <th>Product Rate</th>
-                    <th>Booking</th>
+                    <th>USER ID</th>
+                    <th>PRODUCT</th>
+                    <th>Booking Time</th>
+                    <th>View Booked Product</th>
                 </tr>
             </thead>
             <tbody>
+                
                 <tr>
-                    <td>ABC Store</td>
-                    <td>Electronics</td>
-                    <td>rs 100</td>
-                    <td><button class="btn-book">Book Now</button></td>
+                    {% for i in obj %}    
+                    <td>{{i.USERID.name}}</td>
+                    <td>{{i.PRODUCT.name}}</td>
+                    <td>{{i.date}}</td>
+                    <td>
+                        <a href="/viewproduct/{{i.id}}"><button onclick="productbookingDetails(1)">View Product</button></a>
+                    </td>
                 </tr>
-                <tr>
-                    <td>XYZ Mart</td>
-                    <td>Groceries</td>
-                    <td>rs 50</td>
-                    <td><button class="btn-book">Book Now</button></td>
-                </tr>
-                <!-- Additional rows can go here -->
+                {% endfor %} 
             </tbody>
         </table>
     </div>
+
+    <script>
+        // Function to handle the "View Product" button click
+        function viewBookingDetails(bookingId) {
+            // Example: Displaying the booking ID to simulate viewing product details
+            alert("Viewing details for booking ID: " + bookingId);
+            // Here you could open a modal or redirect to a detailed page
+            // window.location.href = "/booking-details?id=" + bookingId;  // Example redirect
+        }
+    </script>
 </body>
 </html>

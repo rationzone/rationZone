@@ -1,39 +1,72 @@
-{% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manage Notifications</title>
-    <link rel="stylesheet" href="{% static 'css/managenotification.css' %}">
+    <title>Message Sending Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 50%;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-size: 14px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Manage Notifications</h1>
-        <p class="description">Select which notifications you'd like to receive:</p>
-        <div class="notification-item">
-            <label class="switch">
-                <input type="checkbox" checked>
-                <span class="slider round"></span>
-            </label>
-            <span>Order Updates</span>
-        </div>
-        <div class="notification-item">
-            <label class="switch">
-                <input type="checkbox">
-                <span class="slider round"></span>
-            </label>
-            
-            <span>New Products</span>
-        </div>
-        <div class="notification-item">
-            <label class="switch">
-                <input type="checkbox">
-                <span class="slider round"></span>
-            </label>
-            <span>Stock Alerts</span>
-        </div>
-    </div>
+
+<div class="container">
+    <h2>Send a notification</h2>
+    <form action="" method="POST">
+        {%csrf_token%}
+        <!-- Name -->
+        
+
+        <!-- Message -->
+        <label for="message">Your Message</label>
+        <textarea id="message" name="notification" rows="5" required></textarea>
+
+        <!-- Submit Button -->
+        <button type="submit">Send Message</button>
+    </form>
+</div>
+
 </body>
 </html>

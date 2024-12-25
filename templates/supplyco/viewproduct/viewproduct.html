@@ -1,0 +1,40 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>product </title>
+  <link rel="stylesheet" href="{% static 'css/digitalcard.css'%}">
+</head>
+<body>  
+  <div class="card-container">
+    <div class="id-card">
+      <div class="id-card-left">
+        <img class="profile" src="{{a.PRODUCT.image.url}}" alt="Profile Picture">
+      </div>
+      <div class="id-card-right">
+        <div class="card-header">
+         
+        </div>
+        <div class="card-body">
+          <div class="user-details">
+            <p><strong>user:</strong>{{a.USERID.name}} </p>          
+            <p><strong>product Name:</strong>{{a.PRODUCT.name}}</p>
+            <p><strong>quantity:</strong>{{a.quantity}}</p>
+            <p><strong>price:</strong>{{a.PRODUCT.price}} </p>
+            <select name="" id="">
+              <option value="pending">pending</option>
+              <option value="delivered">delivered</option>
+              <option value="cancelled">cancelled</option>
+            </select>
+          </div>
+          
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</body>
+</html>

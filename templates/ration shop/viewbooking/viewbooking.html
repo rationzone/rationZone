@@ -5,7 +5,7 @@
 <head> 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View Booking Product</title>
+    <title>View Booking stocks</title>
     <link rel="stylesheet" href="{% static 'css/viewbooking.css' %}">
     <style>
         table {
@@ -42,7 +42,7 @@
  
                 <tr>
                     <th>USER ID</th>
-                    <th>PRODECT</th>
+                    <th>stock</th>
                     <th>Booking Time</th>
                     <th>View Booked Product</th>
                 </tr>
@@ -54,7 +54,7 @@
                     <td>{{i.USERID}}</td>
                     <td>{{i.PRODUCT}}</td>
                     <td>{{i.date}}</td>
-                    <td><button onclick="viewBookingDetails(1)">View Product</button></td>
+                    <td><button onclick="viewBookingDetails(1)">View stock</button></td>
                 </tr>
                 {% endfor %} 
             </tbody>

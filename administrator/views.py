@@ -2,6 +2,8 @@ from itertools import product
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.views import View
+from rest_framework.views import APIView
+from rest_framework.response import Response
 
 from .form import *
 from .models import *
@@ -206,3 +208,21 @@ class viewproduct(View):
     def get(self,request,bookingid):
         obj=supplycoBookingtable.objects.get(id=bookingid)
         return render(request,'supplyco/viewproduct/viewproduct.html',{'a':obj})    
+
+
+# ////////////////////////////////////////////////// API ///////////////////////////////////////////////////////////
+
+class ViewProduct(APIView):
+    def get(self,request):
+        product = producttable.objects.all()
+        product_serializer = ProductSerializer(product, many = True)
+        print("---------> offer images", product_serializer)
+        return Response(product_serializer.data) 
+    
+class supplycoorders(APIView):
+    def get(self,request):
+        product = supplycoBookingtable.objects.all()
+        product_serializer = ProductSerializer(product, many = True)
+        print("---------> offer images", product_serializer)
+        return Response(product_serializer.data) 
+    

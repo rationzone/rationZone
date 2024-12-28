@@ -4,6 +4,9 @@ from django.shortcuts import redirect, render
 from django.views import View
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework import status
+
+from administrator.serializer import *
 
 from .form import *
 from .models import *
@@ -212,17 +215,116 @@ class viewproduct(View):
 
 # ////////////////////////////////////////////////// API ///////////////////////////////////////////////////////////
 
-class ViewProduct(APIView):
-    def get(self,request):
-        product = producttable.objects.all()
-        product_serializer = ProductSerializer(product, many = True)
-        print("---------> offer images", product_serializer)
-        return Response(product_serializer.data) 
+from django.contrib.auth.hashers import make_password
+class SignupApi(APIView):
+    def post(self, request):
+        print("#########", request.data)
+        
+        # Initialize serializers
+        user_serializer = UserSerializer(data=request.data)
+        login_serializer = LoginSerializer(data=request.data)
+
+        # Validate both serializers
+        user_valid = user_serializer.is_valid()
+        login_valid = login_serializer.is_valid()
+
+        if user_valid and login_valid:
+            print("&&&&&&&&&&&&&&")
+            
+            # Hash the password before saving
+            password = request.data['password']
+            hashed_password = make_password(password)  # Securely hash the password
+            
+            # Save the login profile
+            login_profile = login_serializer.save(usertype='USER', password=hashed_password)
+
+            # Save the user profile with the login profile reference
+            user_serializer.save(LOGINID=login_profile)
+
+            return Response(user_serializer.data, status=status.HTTP_201_CREATED)
+        
+        # Return validation errors if any
+        return Response({
+            'login_error': login_serializer.errors if not login_valid else None,
+            'user_error': user_serializer.errors if not user_valid else None
+        }, status=status.HTTP_400_BAD_REQUEST)
     
-class supplycoorders(APIView):
+
+
+class LoginApi(APIView):
     def get(self,request):
-        product = supplycoBookingtable.objects.all()
-        product_serializer = ProductSerializer(product, many = True)
-        print("---------> offer images", product_serializer)
-        return Response(product_serializer.data) 
+        profile = LoginTable.objects.all()
+        profile_serializer = LoginSerializer(profile, many = True)
+        return Response(profile_serializer.data)
+class ProfileApi(APIView):
+    def get(self,request):
+        profile = usertable.objects.all()
+        profile_serializer = ProfileSerializer(profile, many = True)
+        return Response(profile_serializer.data)    
+class EditprofileApi(APIView):
+    def get(self,request):
+        profile = usertable.objects.all()
+        profile_serializer = UserSerializer(profile, many = True)
+        return Response(profile_serializer.data) 
+class FeedbackApi(APIView):
+    def get(self,request):
+        feedback = feedbacktable.objects.all()
+        feedback_serializer = FeedbackSerializer(feedback, many = True)
+        return Response(feedback_serializer.data) 
     
+class ViewstockApi(APIView):
+    def get(self,request):
+        stock = stocktable.objects.all()
+        stock_serializer = ViewstockSerializer(stock, many = True)
+        return Response(stock_serializer.data)       
+    
+class StockApi(APIView):
+    def get(self,request):
+        stock = stocktable.objects.all()
+        stock_serializer = stockSerializer(stock, many = True)
+        return Response(stock_serializer.data)       
+
+
+class ShoporderApi(APIView):
+    def get(self,request):
+        stock = shopBookingtable.objects.all()
+        stock_serializer = ShopordersSerializer(stock, many = True)
+        return Response(stock_serializer.data)     
+
+class ShoptimeApi(APIView):
+    def get(self,request):
+        stock = Shopprofile.objects.all()
+        stock_serializer = ShoptimeSerializer(stock, many = True)
+        return Response(stock_serializer.data) 
+
+class ViewproductApi(APIView):
+    def get(self,request):
+        stock = producttable.objects.all()
+        stock_serializer = ViewproductSerializer(stock, many = True)
+        return Response(stock_serializer.data) 
+
+class ProductApi(APIView):
+    def get(self,request):
+        stock = producttable.objects.all()
+        stock_serializer = ProductSerializer(stock, many = True)
+        return Response(stock_serializer.data)  
+    
+
+class SupplycoordersApi(APIView):
+    def get(self,request):
+        stock = supplycoBookingtable.objects.all()
+        stock_serializer = supplycoordersSerializer(stock, many = True)
+        return Response(stock_serializer.data)     
+
+
+class NotificatinsApi(APIView):
+    def get(self,request):
+        stock =notificationtable.objects.all()
+        stock_serializer = NotificationsSerializer(stock, many = True)
+        return Response(stock_serializer.data)   
+
+               
+           
+
+
+     

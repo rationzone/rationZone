@@ -26,11 +26,10 @@ class supplycoprofile(models.Model):
 
 
 class usertable(models.Model):
-    userid=models.CharField(max_length=100,null=True,blank=True)
+    username=models.CharField(max_length=100,null=True,blank=True)
     name=models.CharField(max_length=100,null=True,blank=True)
     phone=models.CharField(max_length=100,null=True,blank=True)
     email=models.CharField(max_length=100,null=True,blank=True)
-    address=models.CharField(max_length=100,null=True,blank=True)
     LOGINID=models.ForeignKey(LoginTable,on_delete=models.CASCADE,null=True,blank=True)
 
 
@@ -81,4 +80,3 @@ class feedbacktable(models.Model):
     user=models.ForeignKey(usertable,on_delete=models.CASCADE,null=True,blank=True)
     feedback=models.CharField(max_length=400,null=True,blank=True)
     date=models.DateField(null=True,blank=True)
-

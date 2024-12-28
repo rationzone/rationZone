@@ -35,4 +35,20 @@ urlpatterns = [
     path('approve_supplyco/<int:login_id>',approve_supplyco.as_view(),name='approve_supplyco'),
     path('reject_supplyco/<int:login_id>',reject_supplyco.as_view(),name='reject_supplyco'),
     path('viewproduct/<int:bookingid>',viewproduct.as_view(),name='viewproduct'),
+
+    # ////////////////////////////////////// API /////////////////////////////////////////////////
+    path('SignupApi',SignupApi.as_view(),name='SignupApi'),
+    path('LoginApi',LoginApi.as_view(),name='LoginApi'),
+    path('ProfileApi',ProfileApi.as_view(),name='ProfileApi'),
+    path('EditprofileApi',EditprofileApi.as_view(),name='EditprofileApi'),
+    path('FeedbackApi',FeedbackApi.as_view(),name='FeedbackApi'),
+    path('ViewstockApi',ViewstockApi.as_view(),name='ViewstockApi'),
+    path('StockApi',StockApi.as_view(),name='StockApi'),
+    path('ShoporderApi',ShoporderApi.as_view(),name='ShoporderApi'),
+    path('ShoptimeApi',ShoptimeApi.as_view(),name='ShoptimeApi'),
+    path('ViewproductApi',ViewproductApi.as_view(),name='ViewproductApi'),
+    path('ProductApi',ProductApi.as_view(),name='ProductApi'),
+    path('SupplycoordersApi',SupplycoordersApi.as_view(),name='SupplycoordersApi'),
+    path('NotificatinsApi',NotificatinsApi.as_view(),name='NotificatinsApi'),
+
 ]

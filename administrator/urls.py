@@ -39,7 +39,7 @@ urlpatterns = [
     # ////////////////////////////////////// API /////////////////////////////////////////////////
     path('SignupApi',SignupApi.as_view(),name='SignupApi'),
     path('LoginApi',LoginApi.as_view(),name='LoginApi'),
-    path('ProfileApi',ProfileApi.as_view(),name='ProfileApi'),
+    path('ProfileApi/<int:p_id>',ProfileApi.as_view(),name='ProfileApi'),
     path('EditprofileApi',EditprofileApi.as_view(),name='EditprofileApi'),
     path('FeedbackApi',FeedbackApi.as_view(),name='FeedbackApi'),
     path('ViewstockApi',ViewstockApi.as_view(),name='ViewstockApi'),

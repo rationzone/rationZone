@@ -216,6 +216,7 @@ class viewproduct(View):
 # ////////////////////////////////////////////////// API ///////////////////////////////////////////////////////////
 
 from django.contrib.auth.hashers import make_password
+
 class SignupApi(APIView):
     def post(self, request):
         print("#########", request.data)
@@ -231,12 +232,9 @@ class SignupApi(APIView):
         if user_valid and login_valid:
             print("&&&&&&&&&&&&&&")
             
-            # Hash the password before saving
-            password = request.data['password']
-            hashed_password = make_password(password)  # Securely hash the password
-            
+
             # Save the login profile
-            login_profile = login_serializer.save(usertype='USER', password=hashed_password)
+            login_profile = login_serializer.save(usertype='USER')
 
             # Save the user profile with the login profile reference
             user_serializer.save(LOGINID=login_profile)
@@ -252,15 +250,47 @@ class SignupApi(APIView):
 
 
 class LoginApi(APIView):
-    def get(self,request):
-        profile = LoginTable.objects.all()
-        profile_serializer = LoginSerializer(profile, many = True)
-        return Response(profile_serializer.data)
+    def post(self, request):
+        print("###################")
+        response_dict = {}
+
+        # Get data from the request
+        username = request.data.get("username")
+        password = request.data.get("password")
+        print(username)
+        print(password)
+        # Validate input
+        if not username or not password:
+            response_dict["message"] = "failed"
+            return Response(response_dict, status=status.HTTP_400_BAD_REQUEST)
+
+        # Fetch the user from LoginTable
+        t_user = LoginTable.objects.filter(username=username).first()
+
+        if not t_user:
+            response_dict["message"] = "failed"
+            return Response(response_dict, status=status.HTTP_401_UNAUTHORIZED)
+
+        # # Check password using check_password
+        # if not check_password(password, t_user.password):
+        #     response_dict["message"] = "failed"
+        #     return Response(response_dict, status=status.HTTP_401_UNAUTHORIZED)
+
+        # Successful login response
+        response_dict["message"] = "success"
+        response_dict["login_id"] = t_user.id
+
+        return Response(response_dict, status=status.HTTP_200_OK)
+
+
 class ProfileApi(APIView):
-    def get(self,request):
-        profile = usertable.objects.all()
+    def get(self,request, p_id):
+        print("@@@@@@@@@@@@@@@@@", p_id)
+        profile = usertable.objects.filter(LOGINID_id=p_id)
         profile_serializer = ProfileSerializer(profile, many = True)
-        return Response(profile_serializer.data)    
+        print("$$$$$$$$$$$$$",profile_serializer.data)
+        return Response(profile_serializer.data, status=status.HTTP_200_OK) 
+
 class EditprofileApi(APIView):
     def get(self,request):
         profile = usertable.objects.all()

@@ -5,7 +5,7 @@ class ProfileSerializer(ModelSerializer):
 
     class Meta:
         model=usertable
-        fields=['userid','name','phone','email','address']
+        fields=['name','phone','email']
 
 
 class FeedbackSerializer(ModelSerializer):

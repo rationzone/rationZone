@@ -41,7 +41,7 @@
             <thead>
  
                 <tr>
-                    <th>USER ID</th>
+                    <th>USER name</th>
                     <th>stock</th>
                     <th>Booking Time</th>
                     <th>View Booked Product</th>
@@ -51,8 +51,8 @@
                 
                 <tr>
                     {% for i in obj %}    
-                    <td>{{i.USERID}}</td>
-                    <td>{{i.PRODUCT}}</td>
+                    <td>{{i.USERID.username}}</td>
+                    <td>{{i.STOCK.name}}</td>
                     <td>{{i.date}}</td>
                     <td><button onclick="viewBookingDetails(1)">View stock</button></td>
                 </tr>
